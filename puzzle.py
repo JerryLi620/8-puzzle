@@ -1,6 +1,5 @@
 from random import shuffle
 
-
 class Puzzle:
     def __init__(self, numbers=None):
         if numbers == None:
@@ -27,6 +26,27 @@ class Puzzle:
                     inversion += 1
         return inversion % 2 == 0
 
-
+    def move(self, dir, i, j):
+        if dir == "up":
+            if i == 0:
+                print("Error, invalid coordinate")
+            else:
+                self.board[i][j], self.board[i-1][j] = self.board[i-1][j], self.board[i][j]
+        elif dir == "down":
+            if i == len(self.board):
+                print("Error, invalid coordinate")
+            else:
+                self.board[i][j], self.board[i+1][j] = self.board[i+1][j], self.board[i][j]
+        elif dir == "left":
+            if j == 0:
+                print("Error, invalid coordinate")
+            else:
+                self.board[i][j], self.board[i][j-1] = self.board[i][j-1], self.board[i][j]
+        else:
+            if j == len(self.board[0]):
+                print("Error, invalid coordinate")
+            else:
+                self.board[i][j], self.board[i][j+1] = self.board[i][j+1], self.board[i][j]
+        
 puzzle = Puzzle()
 print(puzzle)
