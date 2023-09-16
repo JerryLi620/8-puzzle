@@ -22,7 +22,7 @@ class Puzzle:
 
         for i in range(len(numbers)):
             for j in range(i + 1, len(numbers)):
-                if numbers[i] > numbers[j]:
+                if numbers[i] > numbers[j] and numbers[i]!=0 and numbers[j]!=0:
                     inversion += 1
         return inversion % 2 == 0
 
