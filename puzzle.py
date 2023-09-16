@@ -47,6 +47,27 @@ class Puzzle:
                 print("Error, invalid coordinate")
             else:
                 self.board[i][j], self.board[i][j+1] = self.board[i][j+1], self.board[i][j]
-        
+    
+    def manhattan(self):
+        distance = 0
+        for i in range(len(self.board)):
+            for j in range(len(self.board[i])):
+                title = self.board[i][j]
+                if title != 0:
+                    goal_i, goal_j = divmod(title, 3)
+                    distance += abs(goal_i-i)+abs(goal_j-j)
+        return distance
+
+    def misplaced_titles(self):
+        goal = 0
+        misplaced = 0
+        for i in range(len(self.board)):
+            for j in range(self.board[i]):
+                if self.board[i][j] != goal:
+                    misplaced +=1
+                goal +=1
+        return misplaced
+
+
 puzzle = Puzzle()
 print(puzzle)
