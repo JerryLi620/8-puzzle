@@ -45,12 +45,15 @@ def astar_search(start_state, heuristic):
                 total_nodes += 1
         
 if __name__ == "__main__":
-    initial_puzzle = Puzzle()  # Assuming Puzzle class has a random initializer
+    initial_puzzle = Puzzle()
     print("Initial puzzle:")
     print(initial_puzzle)
 
     depth, ebf = astar_search(initial_puzzle, "misplaced_titles")
+    depth2, ebf2 = astar_search(initial_puzzle, "manhattan")
     print(depth, ebf)
+    print(depth2, ebf2)
+
 
 
 
