@@ -56,14 +56,10 @@ class Puzzle:
         goal = 0
         misplaced = 0
         for i in range(len(self.board)):
-            for j in range(self.board[i]):
-                if self.board[i][j] != goal:
+            for j in range(len(self.board[i])):
+                if self.board[i][j] != goal and self.board[i][j] != 0:
                     misplaced +=1
                 goal +=1
         return misplaced
     
 
-
-
-puzzle = Puzzle()
-print(puzzle)
