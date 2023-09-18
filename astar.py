@@ -23,7 +23,7 @@ def astar_search(start_state, heuristic):
     start_node = Node(start_state, None, g=0, h=heuristic_func())
     heappush(frontier, start_node)
 
-    visited.add(str(start_state.board))
+    visited.add(str(start_state))
     total_nodes = 1
     while frontier:
         print(total_nodes)
@@ -40,7 +40,7 @@ def astar_search(start_state, heuristic):
 
             if str(puzzle.board) not in visited:
                 heappush(frontier, neighbor_node)
-                visited.add(str(puzzle.board))
+                visited.add(str(puzzle))
                 total_nodes += 1
 
 
