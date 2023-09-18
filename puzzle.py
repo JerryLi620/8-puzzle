@@ -1,5 +1,6 @@
 from random import shuffle
 
+
 class Puzzle:
     def __init__(self, numbers=None):
         if numbers == None:
@@ -22,26 +23,28 @@ class Puzzle:
 
         for i in range(len(numbers)):
             for j in range(i + 1, len(numbers)):
-                if numbers[i] > numbers[j] and numbers[i]!=0 and numbers[j]!=0:
+                if numbers[i] > numbers[j] and numbers[i] != 0 and numbers[j] != 0:
                     inversion += 1
         return inversion % 2 == 0
-    
+
     def neighbors(self):
         neighbors = []
+
         for i in range(len(self.board)):
             for j in range(len(self.board[i])):
                 if self.board[i][j] == 0:
 
-                    directions = [[i-1,j],[i+1,j],[i, j+1],[i, j-1]]
+                    directions = [[i-1, j], [i+1, j], [i, j+1], [i, j-1]]
 
                     for new_i, new_j in directions:
-                        if 0<= new_i < len(self.board) and 0 <= new_j < len(self.board[0]):
+                        if 0 <= new_i < len(self.board) and 0 <= new_j < len(self.board[0]):
                             new_board = [row[:] for row in self.board]
                             new_board[i][j], new_board[new_i][new_j] = new_board[new_i][new_j], new_board[i][j]
-                            neighbor_puzzle = Puzzle(numbers = [num for row in new_board for num in row])
+                            neighbor_puzzle = Puzzle(
+                                numbers=[num for row in new_board for num in row])
                             neighbors.append(neighbor_puzzle)
                     return neighbors
-                
+
     def manhattan(self):
         distance = 0
         for i in range(len(self.board)):
@@ -58,8 +61,6 @@ class Puzzle:
         for i in range(len(self.board)):
             for j in range(len(self.board[i])):
                 if self.board[i][j] != goal and self.board[i][j] != 0:
-                    misplaced +=1
-                goal +=1
+                    misplaced += 1
+                goal += 1
         return misplaced
-    
-
