@@ -26,13 +26,12 @@ def astar_search(start_state, heuristic):
     visited.add(str(start_state))
     total_nodes = 1
     while frontier:
-        print(total_nodes)
         current_node = heappop(frontier)
 
         if current_node.puzzle.solved():
             depth = current_node.g
             branching_factor = total_nodes ** (1 / depth)
-            return depth, branching_factor
+            return depth, total_nodes,branching_factor
 
         for puzzle in current_node.puzzle.neighbors():
             h = puzzle.misplaced_titles() if heuristic == "misplaced_titles" else puzzle.manhattan()
@@ -40,16 +39,7 @@ def astar_search(start_state, heuristic):
 
             if str(puzzle.board) not in visited:
                 heappush(frontier, neighbor_node)
-                visited.add(str(puzzle))
+                visited.add(str(puzzle.board))
                 total_nodes += 1
 
 
-if __name__ == "__main__":
-    initial_puzzle = Puzzle()
-    print("Initial puzzle:")
-    print(initial_puzzle)
-
-    # depth, ebf = astar_search(initial_puzzle, "misplaced_titles")
-    depth2, ebf2 = astar_search(initial_puzzle, "manhattan")
-    # print(depth, ebf)
-    print(depth2, ebf2)
