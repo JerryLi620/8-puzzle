@@ -10,7 +10,7 @@ def dls(puzzle, limit):
 
         if current_puzzle.solved():
             ebf = nodes_generated**(1/current_depth)
-            return current_depth, ebf
+            return current_depth, nodes_generated,ebf
         
         visited.add(str(current_puzzle.board))
 
@@ -25,3 +25,4 @@ def ids(start_state, depth_limit):
         result = dls(start_state, limit)
         if result:
             return result
+        
