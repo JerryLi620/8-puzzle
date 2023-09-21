@@ -1,0 +1,49 @@
+---
+title: "result_analysis"
+author: "Richard Hu"
+date: "2023-09-19"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+#Load Library
+library(tidyverse)
+```
+
+
+```{r}
+df<-read_csv('experiment_results.csv')
+```
+```{r}
+summary_ebf <- df %>%
+  group_by(Algorithm, Depth) %>%
+  summarise(avg_ebf = mean(`Effective Branching Factor`))
+
+summary_nodes <- df %>% 
+  group_by(Algorithm, Depth) %>%
+  summarise(avg_nodes = mean(`Nodes Generated`))
+```
+
+```{r}
+# Using pivot_wider to handle both duplicates and missing values
+spread_dataset_ebf <- summary_ebf %>%
+  pivot_wider(names_from = `Algorithm`, values_from = `avg_ebf`, values_fn = list(avg_ebf = mean), values_fill = 0)
+
+spread_dataset_nodes <- summary_nodes %>%
+  pivot_wider(names_from = `Algorithm`, values_from = `avg_nodes`, values_fn = list(avg_nodes = mean), values_fill =0)
+```
+
+```{r}
+spread_data <- merge(spread_dataset_ebf, spread_dataset_nodes, by.x = "Depth", by.y = "Depth")
+
+result <- spread_data %>%
+  filter(Depth %% 2 == 0)
+```
+
+```{r}
+write_csv(result, "result_table.csv")
+```
