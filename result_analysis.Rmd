@@ -45,5 +45,51 @@ result <- spread_data %>%
 ```
 
 ```{r}
+## preparing finish
 write_csv(result, "result_table.csv")
+```
+
+
+compare the result to the result in the book
+```{r}
+my_results <- read.csv("result_table.csv")
+russell_norvig_results <- read.csv("Russell and Norvig's Result.csv")
+```
+
+
+```{r}
+# Plotting Effective Branching Factor
+ggplot() +
+  geom_line(data = my_results, aes(x = Depth, y = `A..h1..b.`, color = "My A*(h1)")) +
+  geom_line(data = my_results, aes(x = Depth, y = `A..h2..b.`, color = "My A*(h2)")) +
+  geom_line(data = my_results, aes(x = Depth, y = `IDS.b.`, color = "My IDS")) +
+  geom_line(data = russell_norvig_results, aes(x = Depth, y = `A..h1..b.`, color = "Russell and Norvig A*(h1)")) +
+  geom_line(data = russell_norvig_results, aes(x = Depth, y = `A..h2..b.`, color = "Russell and Norvig A*(h2)")) +
+  geom_line(data = russell_norvig_results, aes(x = Depth, y = `IDS.b.`, color = "Russell and Norvig IDS")) +
+  ggtitle("Effective Branching Factor Comparison") +
+  xlab("Depth") +
+  ylab("Effective Branching Factor (b*)") +
+  theme_minimal() +
+  scale_color_manual(values = c("My A*(h1)" = "blue", "My A*(h2)" = "green", "My IDS" = "red", 
+                                "Russell and Norvig A*(h1)" = "purple", "Russell and Norvig A*(h2)" = "orange", "Russell and Norvig IDS" = "brown"))
+
+```
+
+
+```{r}
+# Plotting Total Nodes Generated
+ggplot() +
+  geom_line(data = my_results, aes(x = Depth, y = `A..h1..total.nodes`, color = "My A*(h1)")) +
+  geom_line(data = my_results, aes(x = Depth, y = `A..h2..total.nodes`, color = "My A*(h2)")) +
+  geom_line(data = my_results, aes(x = Depth, y = `IDS.total.nodes`, color = "My IDS")) +
+  geom_line(data = russell_norvig_results, aes(x = Depth, y = `A..h1..total.nodes`, color = "Russell and Norvig A*(h1)")) +
+  geom_line(data = russell_norvig_results, aes(x = Depth, y = `A..h2..total.nodes`, color = "Russell and Norvig A*(h2)")) +
+  geom_line(data = russell_norvig_results, aes(x = Depth, y = `IDS.total.nodes`, color = "Russell and Norvig IDS")) +
+  ggtitle("Total Nodes Generated Comparison") +
+  xlab("Depth") +
+  ylab("Total Nodes Generated") +
+  theme_minimal() +
+  scale_color_manual(values = c("My A*(h1)" = "blue", "My A*(h2)" = "green", "My IDS" = "red", 
+                                "Russell and Norvig A*(h1)" = "purple", "Russell and Norvig A*(h2)" = "orange", "Russell and Norvig IDS" = "brown"))
+
 ```

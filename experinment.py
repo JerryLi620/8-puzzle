@@ -24,15 +24,15 @@ def run_experiment(n, depth_limit):
 
             # Run A* with Manhattan distance
             depth, nodes, ebf = astar_search(puzzle, "manhattan")
-            writer.writerow({"Algorithm": "A*", "Heuristic/Depth Limit": "Manhattan", "Depth": depth, "Nodes Generated": nodes, "Effective Branching Factor": ebf})
+            writer.writerow({"Algorithm": "A*(h2)", "Heuristic/Depth Limit": "Manhattan", "Depth": depth, "Nodes Generated": nodes, "Effective Branching Factor": ebf})
 
             # Run A* with misplaced titles
             depth, nodes, ebf = astar_search(puzzle, "misplaced_titles")
-            writer.writerow({"Algorithm": "A*", "Heuristic/Depth Limit": "Misplaced Titles", "Depth": depth, "Nodes Generated": nodes, "Effective Branching Factor": ebf})
+            writer.writerow({"Algorithm": "A*(h1)", "Heuristic/Depth Limit": "Misplaced Titles", "Depth": depth, "Nodes Generated": nodes, "Effective Branching Factor": ebf})
 
             # Run IDS
             depth, nodes, ebf = ids(puzzle, depth_limit)
             writer.writerow({"Algorithm": "IDS", "Heuristic/Depth Limit": "N/A", "Depth": depth, "Nodes Generated": nodes, "Effective Branching Factor": ebf})
 
 if __name__ == "__main__":
-    run_experiment(500, 100)
+    run_experiment(5000, 100)
