@@ -1,6 +1,6 @@
 from puzzle import Puzzle
 from heapq import heappush, heappop
-
+from scipy.optimize import newton
 
 class Node:
     def __init__(self, puzzle, parent, g, h):
@@ -13,6 +13,14 @@ class Node:
     def __lt__(self, other):
         return self.f < other.f
 
+def ebf_equation(b, N, d):
+    return 1 - b**(d + 1) - (N + 1) * (1 - b)
+
+def ebf_derivative(b, N, d):
+    return -((d + 1) * b**d) + (N + 1)
+
+def calculate_ebf(N, d, initial_guess =2):
+    return newton(ebf_equation, initial_guess, fprime=ebf_derivative, args=(N, d))
 
 def astar_search(start_state, heuristic):
     frontier = []
@@ -30,7 +38,7 @@ def astar_search(start_state, heuristic):
 
         if current_node.puzzle.solved():
             depth = current_node.g
-            branching_factor = total_nodes ** (1 / depth)
+            branching_factor = calculate_ebf(total_nodes, depth)
             return depth, total_nodes,branching_factor
 
         for puzzle in current_node.puzzle.neighbors():
@@ -42,4 +50,7 @@ def astar_search(start_state, heuristic):
                 visited.add(str(puzzle.board))
                 total_nodes += 1
 
+if __name__ == "__main__":
+    puzzle = Puzzle()
+    print(astar_search(puzzle, "misplaced_titles"))
 
