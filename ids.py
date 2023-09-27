@@ -7,7 +7,7 @@ def ebf_equation(b, N, d):
 def ebf_derivative(b, N, d):
     return -((d + 1) * b**d) + (N + 1)
 
-def calculate_ebf(N, d, initial_guess =2):
+def calculate_ebf(N, d, initial_guess =3):
     return newton(ebf_equation, initial_guess, fprime=ebf_derivative, args=(N, d))
 
 def dls(puzzle, limit, nodes_generated):
@@ -37,7 +37,3 @@ def ids(start_state, depth_limit):
         depth, nodes_generated, ebf = dls(start_state, limit, nodes_generated)
         if depth is not None:
             return depth, nodes_generated, ebf
-
-if __name__ == "__main__":
-    puzzle = Puzzle()
-    print(ids(puzzle, 100))

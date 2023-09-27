@@ -35,4 +35,4 @@ def run_experiment(n, depth_limit):
             writer.writerow({"Algorithm": "IDS", "Heuristic/Depth Limit": "N/A", "Depth": depth, "Nodes Generated": nodes, "Effective Branching Factor": ebf})
 
 if __name__ == "__main__":
-    run_experiment(5000, 100)
+    run_experiment(8000, 100)

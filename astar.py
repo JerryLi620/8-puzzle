@@ -49,8 +49,3 @@ def astar_search(start_state, heuristic):
                 heappush(frontier, neighbor_node)
                 visited.add(str(puzzle.board))
                 total_nodes += 1
-
-if __name__ == "__main__":
-    puzzle = Puzzle()
-    print(astar_search(puzzle, "misplaced_titles"))
-

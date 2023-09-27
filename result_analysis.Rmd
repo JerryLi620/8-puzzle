@@ -93,3 +93,21 @@ ggplot() +
                                 "Russell and Norvig A*(h1)" = "purple", "Russell and Norvig A*(h2)" = "orange", "Russell and Norvig IDS" = "brown"))
 
 ```
+```{r}
+ggplot() +
+  geom_line(data = my_results, aes(x = Depth, y = `A..h1..total.nodes`, color = "My A*(h1)")) +
+  geom_line(data = my_results, aes(x = Depth, y = `A..h2..total.nodes`, color = "My A*(h2)")) +
+  geom_line(data = my_results, aes(x = Depth, y = `IDS.total.nodes`, color = "My IDS")) +
+  geom_line(data = russell_norvig_results, aes(x = Depth, y = `A..h1..total.nodes`, color = "Russell and Norvig A*(h1)")) +
+  geom_line(data = russell_norvig_results, aes(x = Depth, y = `A..h2..total.nodes`, color = "Russell and Norvig A*(h2)")) +
+  geom_line(data = russell_norvig_results, aes(x = Depth, y = `IDS.total.nodes`, color = "Russell and Norvig IDS")) +
+  ggtitle("Total Nodes Generated Comparison (Logarithmic Scale)") +
+  xlab("Depth") +
+  ylab("Total Nodes Generated (Log Scale)") +
+  theme_minimal() +
+  scale_y_log10() + 
+  scale_color_manual(values = c("My A*(h1)" = "blue", "My A*(h2)" = "green", "My IDS" = "red", 
+                                "Russell and Norvig A*(h1)" = "purple", "Russell and Norvig A*(h2)" = "orange", "Russell and Norvig IDS" = "brown"))
+
+
+```
